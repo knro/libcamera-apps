@@ -128,7 +128,8 @@ std::string const &RPiCamApp::CameraId() const
 
 std::string RPiCamApp::CameraModel() const
 {
-	return std::string(camera_->properties().get(properties::Model).value_or(camera_->id()));
+	auto model = camera_->properties().get(properties::Model);
+    return model ? std::string(*model) : camera_->id();
 }
 
 void RPiCamApp::OpenCamera()
